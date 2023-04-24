@@ -4,11 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>checkbox test</title>
 </head>
 <body>
-    <a href="mailto:test@gmail.com">메일</a>
-    <a href="sms:01012345678,01022223333">문자</a>
-    <a href="tel:01012345678">전화</a>
+    <a id="sendSms" href="sms:">
+        <button>문자 발송</button>
+    </a>
+    <a id="sendEmail" href="mailto:">
+        <button>메일 발송</button>
+    </a><br>
+    회원1 <input name="check_user" type="checkbox" value="010-1234-2233,test@name.cor" onclick="getCheckboxValue()"><br>
+    회원2 <input name="check_user" type="checkbox" value="010-1234-2233,test@name.cor" onclick="getCheckboxValue()"><br>
+    <div>
+        <p>result</p>
+        <p>
+            <span class="result"></span><br>
+            <span class="sms"></span><br>
+            <span class="email"></span><br> 
+        </p>
+    </div>
 </body>
+<script>
+    function getCheckboxValue() {
+        const query = 'input[name="check_user"]:checked';
+        const checkedUsers = document.querySelectorAll(query);
+
+        let checkResult = '';
+        let userCell = '';
+        let userEmail = '';
+
+        checkedUsers.forEach((el) => {
+
+            checkResult = el.value;
+
+            const resultArr = checkResult.split(',');
+            userCell += resultArr[0] + ',';
+            userEmail += resultArr[1] + ',';
+
+        });
+
+        document.querySelector('.sms').innerText = userCell;
+        document.querySelector('.email').innerText = userEmail;
+
+        document.getElementById('sendSms').setAttribute('href',`sms:${userCell}`);
+        document.getElementById('sendEmail').setAttribute('href',`mailto:${userEmail}`);
+    }
+
+</script>
 </html>
