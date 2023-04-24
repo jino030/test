@@ -29,9 +29,14 @@
 <script>
 
     function showBtn() {
-        const check_yn = document.querySelector('input[name="check_user"]').checked;
+        const checkEls = document.querySelectorAll('input[type="checkbox"]');
+        let cnt = 0;
+
+        checkEls.forEach((el) => {
+            if(el.checked == true) cnt+=1;
+        });
     
-        if(check_yn){
+        if(cnt>0){
             document.getElementById('sendSms').style.display = 'inline-block';
             document.getElementById('sendEmail').style.display = 'inline-block';
         }else{
