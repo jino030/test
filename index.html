@@ -7,14 +7,14 @@
     <title>checkbox test</title>
 </head>
 <body>
-    <a id="sendSms" href="sms:">
+    <a id="sendSms" class="sendBtn" href="sms:" style="display: none;">
         <button>문자 발송</button>
     </a>
-    <a id="sendEmail" href="mailto:">
+    <a id="sendEmail" class="sendBtn" href="mailto:" style="display: none;">
         <button>메일 발송</button>
     </a><br>
-    회원1 <input name="check_user" type="checkbox" value="010-1234-1233,test1@name.cor" onclick="getCheckboxValue()"><br>
-    회원2 <input name="check_user" type="checkbox" value="010-2234-2233,test2@name.cor" onclick="getCheckboxValue()"><br>
+    회원1 <input name="check_user" type="checkbox" value="010-1234-2233,test@name.cor" onclick="getCheckboxValue()"><br>
+    회원2 <input name="check_user" type="checkbox" value="010-1234-2233,test@name.cor" onclick="getCheckboxValue()"><br>
     <div>
         <p>result</p>
         <p>
@@ -25,7 +25,22 @@
     </div>
 </body>
 <script>
+
+    function showBtn() {
+        const check_yn = document.querySelector('input[name="check_user"]').checked;
+    
+        if(check_yn){
+            document.getElementById('sendSms').style.display = 'inline-block';
+            document.getElementById('sendEmail').style.display = 'inline-block';
+        }else{
+            document.getElementById('sendSms').style.display = 'none';
+            document.getElementById('sendEmail').style.display = 'none';
+        }
+    }
+
     function getCheckboxValue() {
+        showBtn();
+
         const query = 'input[name="check_user"]:checked';
         const checkedUsers = document.querySelectorAll(query);
 
